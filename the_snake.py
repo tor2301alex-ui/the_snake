@@ -133,6 +133,31 @@ class Snake(GameObject):
         self.positions = [(center_x, center_y)]
         self.length = 1
         self.last = None
+    def update_direction(self):
+        """Обновляет направление движения змейки."""
+        if self.next_direction:
+            self.direction = self.next_direction
+            self.next_direction = None
+
+    def get_head_position(self):
+        """Возвращает позицию головы змейки."""
+        return self.positions[0]
+
+    def move(self):
+        """Обновляет позицию змейки на игровом поле."""
+        head = self.get_head_position()
+        x, y = self.direction
+
+        new_head = ((head[0] + (x * GRID_SIZE)) % SCREEN_WIDTH,
+                    (head[1] + (y * GRID_SIZE)) % SCREEN_HEIGHT)
+
+        self.positions.insert(0, new_head)
+
+        if len(self.positions) > self.length:
+            self.last = self.positions.pop()
+        else:
+            self.last = None
+
     # Тут нужно создать экземпляры классов.
     ...
 
