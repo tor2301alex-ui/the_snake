@@ -1,4 +1,4 @@
-from random import choice, randint
+from random import randint
 
 import pygame
 
@@ -68,11 +68,11 @@ class Apple(GameObject):
     Класс Apple. Наследуется от GameObject.
     Появляется в случайном месте поля.
     """
-    apple_color = (255, 0, 0)
-
-    super().__init__(position=None, body_color=apple_color)
-
-    self.randomize_position()
+    
+    def __init__(self):
+        """Инициализирует яблоко со случайной позицией."""
+        super().__init__(body_color=APPLE_COLOR)
+        self.randomize_position()
 
     def randomize_position(self):
         """
