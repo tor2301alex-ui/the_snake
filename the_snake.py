@@ -90,14 +90,10 @@ class Apple(GameObject):
         """
         Отрисовывает яблоко на игровом поле.
         """
-
-        rect = pygame.Rect(
-            self.position[0],
-            self.position[1],
-            20,
-            20
-        )    
-
+        rect = pygame.Rect(self.position, (GRID_SIZE, GRID_SIZE))
+        pygame.draw.rect(surface, self.body_color, rect)
+        pygame.draw.rect(surface, BORDER_COLOR, rect, 1)
+        
         pygame.draw.rect(surface, self.body_color, rect)
     pygame.init()
     # Тут нужно создать экземпляры классов.
