@@ -94,8 +94,31 @@ class Apple(GameObject):
         pygame.draw.rect(surface, self.body_color, rect)
         pygame.draw.rect(surface, BORDER_COLOR, rect, 1)
         
-        pygame.draw.rect(surface, self.body_color, rect)
-    pygame.init()
+
+class Snake(GameObject):
+    """Класс змейки, наследуется от GameObject."""
+
+    def __init__(self):
+        """Инициализирует начальное состояние змейки."""
+        super().__init__(body_color=SNAKE_COLOR)
+        self.reset()
+        self.direction = RIGHT
+        self.next_direction = None
+
+    def reset(self):
+        """Сбрасывает змейку в начальное состояние."""
+        if hasattr(self, 'positions'):
+            for position in self.positions:
+                rect = pygame.Rect(position, (GRID_SIZE, GRID_SIZE))
+                pygame.draw.rect(screen, BOARD_BACKGROUND_COLOR, rect)
+
+        center_x = SCREEN_WIDTH // 2
+        center_y = SCREEN_HEIGHT // 2
+        center_x = (center_x // GRID_SIZE) * GRID_SIZE
+        center_y = (center_y // GRID_SIZE) * GRID_SIZE
+        self.positions = [(center_x, center_y)]
+        self.length = 1
+        self.last = None
     # Тут нужно создать экземпляры классов.
     ...
 
